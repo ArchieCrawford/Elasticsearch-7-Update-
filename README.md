@@ -18,7 +18,7 @@ edit filebeat.yml
 
 ./filebeat setup --index-management -E output.logstash.enabled=false -E 'output.elasticsearch.hosts=["deves01:9500"]'
 
-./filebeat setup -e -E output.logstash.enabled=false -E output.elasticsearch.hosts=['deves01:9500'] -E setup.kibana.host=devkib01.clacorp.com:10560
+./filebeat setup -e -E output.logstash.enabled=false -E output.elasticsearch.hosts=['deves01:9500'] -E setup.kibana.host=devkib01:10560
 
 sudo systemctl start filebeat
 sudo systemctl enable filbeat
