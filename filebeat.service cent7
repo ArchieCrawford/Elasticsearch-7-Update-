@@ -1,0 +1,14 @@
+[Unit]
+Description=filebeat - API Gateway to ADI communication
+After=network.target
+
+[Service]
+ExecStart=/opt/filebeat-7.3.2-linux-x86_64/filebeat -c /opt/filebeat-7.3.2-linux-x86_64/filebeat.yml
+KillMode=process
+User=root
+WorkingDirectory=/opt/filebeat-7.3.2-linux-x86_64
+Restart=always
+RestartSec=30s
+
+[Install]
+WantedBy=multi-user.target
