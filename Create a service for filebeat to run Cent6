@@ -1,0 +1,37 @@
+#!/bin/bash
+
+filebeat_pid() {
+    echo $(ps aux | grep filebeat | grep -v grep | awk '{ print $2 }')
+}
+
+start() {
+  # Start filebeat
+  /opt/filebeat-7.3.1-linux-x86_64/filebeat -c /opt/filebeat-7.3.1-linux-x86_64/filebeat.yml &
+  return 0
+}
+
+stop() {
+  pid=$(filebeat_pid)
+  echo "Shutting down Filebeat"
+  kill -9 $pid
+  return 0
+}
+
+case $1 in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    restart)
+        stop
+        start
+        ;;
+    status)
+        ;;
+    *)
+        echo $"Usage: $NAME {start|stop|restart|status}"
+esac
+
+exit 0
