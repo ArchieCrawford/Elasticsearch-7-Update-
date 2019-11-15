@@ -1,0 +1,19 @@
+Syslog
+grok {
+   match => { "message" => "%{SYSLOGTIMESTAMP:syslog_timestamp}
+%{SYSLOGHOST:syslog_hostname}
+%{DATA:syslog_program}(?:\[%{POSINT:syslog_pid}\])?:
+%{GREEDYDATA:syslog_message}" }
+}
+Copy
+Apache access logs
+grok  {
+      match => { "message" => "%{COMBINEDAPACHELOG}" }
+   }
+Copy
+Elasticsearch
+grok {
+      match => ["message", "\[%{TIMESTAMP_ISO8601:timestamp}\]\[%{DATA:loglevel}%{SPACE}\]\[%{DATA:source}%{SPACE}\]%{SPACE}\[%{DATA:node}\]%{SPACE}\[%{DATA:index}\] %{NOTSPACE} \[%{DATA:updated-type}\]",
+                "message", "\[%{TIMESTAMP_ISO8601:timestamp}\]\[%{DATA:loglevel}%{SPACE}\]\[%{DATA:source}%{SPACE}\]%{SPACE}\[%{DATA:node}\] (\[%{NOTSPACE:Index}\]\[%{NUMBER:shards}\])?%{GREEDYDATA}"
+      ]
+   }
