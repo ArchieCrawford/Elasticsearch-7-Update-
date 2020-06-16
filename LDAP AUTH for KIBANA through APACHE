@@ -1,0 +1,26 @@
+Kibana APACHE AUTH for LDAP 
+
+
+########## KIBANA CONF ############
+    ProxyPreserveHost On
+    ProxyRequests On
+    ProxyPass / http://localhost:10560/
+    ProxyPassReverse / http://localhost:10560/
+
+######### AD authentication
+  LDAPVerifyServerCert off
+  SSLEngine on
+  SSLCertificateFile /etc/SSL LOCATION
+  SSLCertificateKeyFile /etc/SSL.key
+  <Location />
+   AuthName "AD DOMAIN"
+   AuthType Basic
+   AuthBasicProvider ldap
+   AuthLDAPBindAuthoritative off
+   AuthLDAPBindDN "LDAPUSER"
+   AuthLDAPBindPassword "LDAPUSERPASS"
+   AuthLDAPURL "ldaps://LDAP_URL#####)"
+   Require valid-user
+   Order deny,allow
+   Allow from All
+   </location>
