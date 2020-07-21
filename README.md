@@ -33,7 +33,7 @@ Create a different input port number for each server that has a filebeat..
 
 input {
   beats {
-    port => 5044 <---- (server 1 5044) , (server 2 5045), (server 3 5046), and so on..... Create 
+    port => 5044  
   }
 }
 
